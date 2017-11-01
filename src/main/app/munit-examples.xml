@@ -6,6 +6,7 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
 http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd">
     <flow name="sayHello">
-        <set-payload value="#[123]" doc:name="Set Payload: to Hello"/>
+        <set-variable variableName="firstName" value="#['Krishn']" doc:name="Variable: firstName"/>
+        <set-payload value="#['Jello']" doc:name="Set Payload: to Hello"/>
     </flow>
 </mule>

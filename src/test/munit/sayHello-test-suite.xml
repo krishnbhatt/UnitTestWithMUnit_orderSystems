@@ -7,12 +7,16 @@ http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/cor
     <spring:beans>
         <spring:import resource="classpath:munit-examples.xml"/>
     </spring:beans>
-    <munit:test name="sayHello_payloadReutrnsHello_True" description="Calling sayHello flow sets payload to Hello">
+    <munit:test name="sayHello_payloadReutrnsHello_True" description="Calling sayHello flow sets payload to Hello" ignore="true">
         <flow-ref name="sayHello" doc:name="call sayHello"/>
         <munit:assert-payload-equals message="oops... payload is not Hello" expectedValue="#['Hello']" doc:name="Assert Payload: Validate that payload returns Hello"/>
     </munit:test>
     <munit:test name="sayHell0_payloadTypeIsString_True" description="Calling sayHello flow sets payload's datatype to Java String">
         <flow-ref name="sayHello" doc:name="Call sayHello"/>
         <munit:assert-true message="FAILED: Expected payload's type to be Java Sring but found #[payload.getClass().getName()] instead!!" condition="#[payload is java.lang.String]" doc:name="Assert True: Validate that Payload's type is Java String"/>
+    </munit:test>
+    <munit:test name="sayHello_flowVar_firstNameContainsKrishn" description="calling say Hello flow sets floe variable firstname to Krishn">
+        <flow-ref name="sayHello" doc:name="Call sayHello"/>
+        <munit:assert-on-equals message="Failed, Expected firstName to contain Krishn, but found #[flowVars.firstName] instead !!" expectedValue="#['Krishn'	]" actualValue="#[flowVars.firstName]" doc:name="Assert Equals: Validate firstName = Krishn"/>
     </munit:test>
 </mule>
